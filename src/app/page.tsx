@@ -4,6 +4,7 @@ import {
 	SortProductsFeature,
 } from '@/features'
 import { Container, Title } from '@/shared/ui'
+import { ProductsListWidget } from '@/widgets'
 
 export default function Home() {
 	return (
@@ -12,7 +13,7 @@ export default function Home() {
 				<Title text="Все пиццы" size="lg" className="font-extrabold" />
 			</Container>
 
-			<div className="sticky top-0 bg-white py-5 shadow-lg shadow-black/5">
+			<div className="sticky top-0 z-10 bg-white py-5 shadow-lg shadow-black/5">
 				<Container className="flex items-center justify-between ">
 					<CategoriesFeature />
 					<SortProductsFeature />
@@ -20,7 +21,7 @@ export default function Home() {
 			</div>
 
 			<Container className="pb-14 pt-10">
-				<div className="flex gap-[60px]">
+				<div className="flex gap-[80px]">
 					{/* Filters */}
 					<div className="w-[250px]">
 						<FiltersFeature />
@@ -28,7 +29,9 @@ export default function Home() {
 
 					{/* Products list */}
 					<div className="flex-1">
-						<div className=" flex flex-col gap-[16]">Список товаров</div>
+						<div className="flex flex-col gap-16">
+							<ProductsListWidget />
+						</div>
 					</div>
 				</div>
 			</Container>
