@@ -1,4 +1,8 @@
-import { CategoriesFeature, SortProductsFeature } from '@/features'
+import {
+	CategoriesFeature,
+	FiltersFeature,
+	SortProductsFeature,
+} from '@/features'
 import { Container, Title } from '@/shared/ui'
 
 export default function Home() {
@@ -15,7 +19,19 @@ export default function Home() {
 				</Container>
 			</div>
 
-			<div className="h-[3000px]"></div>
+			<Container className="pb-14 pt-10">
+				<div className="flex gap-[60px]">
+					{/* Filters */}
+					<div className="w-[250px]">
+						<FiltersFeature />
+					</div>
+
+					{/* Products list */}
+					<div className="flex-1">
+						<div className=" flex flex-col gap-[16]">Список товаров</div>
+					</div>
+				</div>
+			</Container>
 		</>
 	)
 }
