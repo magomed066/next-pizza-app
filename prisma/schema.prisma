@@ -20,6 +20,8 @@ model User {
   provider String?
   providerId String?
 
+  verified DateTime
+
   orders Order[]
   cart Cart?
 
@@ -41,7 +43,7 @@ model Product {
   categoryId Int
 
   // Product can have many ingredients (many to many)
-  ingredient Ingredient[]
+  ingredients Ingredient[]
 
   // Product can have many variations
   items ProductItem[]
