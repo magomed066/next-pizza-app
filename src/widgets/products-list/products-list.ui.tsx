@@ -1,41 +1,32 @@
 'use client'
 
-import React from 'react'
+import React, { FC } from 'react'
 import { ProductsGroupList } from '@/entities'
 import { useCategoriesStore } from '@/entities/categories'
+import { Category, Ingredient, Product, ProductItem } from '@prisma/client'
 
-export const ProductsListWidget = () => {
+type Props = {
+	categories: (Category & {
+		products: (Product & { items: ProductItem[]; ingredients: Ingredient[] })[]
+	})[]
+}
+
+export const ProductsListWidget: FC<Props> = ({ categories }) => {
 	const { setActiveCategoryId } = useCategoriesStore()
 
 	return (
 		<>
-			<ProductsGroupList
-				onIntersection={setActiveCategoryId}
-				title="Пиццы"
-				products={[
-					{ id: 2 },
-					{ id: 3 },
-					{ id: 4 },
-					{ id: 5 },
-					{ id: 6 },
-					{ id: 7 },
-				]}
-				categoryId={1}
-			/>
-
-			<ProductsGroupList
-				onIntersection={setActiveCategoryId}
-				title="Комбо"
-				products={[
-					{ id: 2 },
-					{ id: 3 },
-					{ id: 4 },
-					{ id: 5 },
-					{ id: 6 },
-					{ id: 7 },
-				]}
-				categoryId={2}
-			/>
+			{categories.map((category) =>
+				category.products.length ? (
+					<ProductsGroupList
+						key={category.id}
+						onIntersection={setActiveCategoryId}
+						title={category.name}
+						categoryId={category.id}
+						products={category.products}
+					/>
+				) : null,
+			)}
 		</>
 	)
 }
