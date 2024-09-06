@@ -2,21 +2,24 @@
 
 import React, { ChangeEvent, useMemo, useState } from 'react'
 
-import { FilterCheckbox, Input } from '@/shared/ui'
+import { FilterCheckbox } from '@/shared/ui'
 import { Props } from './types'
+import { IngredientsSkeleton } from '@/entities'
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
 	title,
 	items,
 	defaultItems,
 	limit = 5,
+	isLoading = false,
 	searchInputPlaceholder = 'Поиск...',
 	className,
-	onChange,
+	onClickCheckbox,
 	defaultValue,
+	selectedValues,
+	name,
 }) => {
 	const [showAll, setShowAll] = React.useState(false)
-	// const [selected, { add, toggle }] = useSet<string>(new Set([]))
 
 	const [searchValue, setSearchValue] = useState('')
 
@@ -29,7 +32,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 			return items
 		}
 
-		return defaultItems.slice(0, limit)
+		return (defaultItems || items)?.slice(0, limit)
 	}, [items, showAll, limit, defaultItems])
 
 	return (
@@ -47,16 +50,21 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 			)} */}
 
 			<div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
-				{list.map((item) => (
-					<FilterCheckbox
-						onCheckedChange={(ids) => console.log(ids)}
-						checked={false}
-						key={String(item.value)}
-						value={item.value}
-						text={item.text}
-						endAdornment={item.endAdornment}
-					/>
-				))}
+				{isLoading ? (
+					<IngredientsSkeleton />
+				) : (
+					list?.map((item) => (
+						<FilterCheckbox
+							onCheckedChange={() => onClickCheckbox?.(item.value)}
+							checked={selectedValues?.has(item.value)}
+							key={String(item.value) + Math.random()}
+							value={item.value}
+							text={item.text}
+							name={name}
+							endAdornment={item.endAdornment}
+						/>
+					))
+				)}
 			</div>
 
 			{items.length > limit && (

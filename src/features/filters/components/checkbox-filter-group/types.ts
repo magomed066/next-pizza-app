@@ -5,10 +5,13 @@ type Item = FilterCheckboxProps
 export type Props = {
 	title: string
 	items: Item[]
-	defaultItems: Item[]
+	defaultItems?: Item[]
+	isLoading?: boolean
 	limit?: number
 	searchInputPlaceholder?: string
 	className?: string
-	onChange?: (values: string[]) => void
+	onClickCheckbox?: (values: string) => void
 	defaultValue?: string[]
+	selectedValues?: Set<string>
+	name?: string
 }
