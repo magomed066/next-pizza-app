@@ -29,12 +29,12 @@ export const ProductsGroupList: FC<Props> = ({
 		<div className={className} id={title} ref={categoryRef}>
 			<Title text={title} size="lg" className="font-extrabold mb-5" />
 			<div className="grid grid-cols-3 gap-[50px]">
-				{products.map((item, i) => (
+				{products.map((item) => (
 					<ProductCard
 						key={item.id}
-						name="Маргарита"
-						id={i}
-						imageUrl="https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp"
+						name={item.name}
+						id={item.id}
+						imageUrl={item.imageUrl}
 						price={390}
 					/>
 				))}

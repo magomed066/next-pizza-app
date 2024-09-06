@@ -1,6 +1,8 @@
+import { Product } from '@prisma/client'
+
 export type Props = {
 	title: string
-	products: any[]
+	products: Product[]
 	className?: string
 	listClassName?: string
 	categoryId: number

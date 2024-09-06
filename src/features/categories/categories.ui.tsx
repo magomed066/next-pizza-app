@@ -5,18 +5,7 @@ import { cn } from '@/shared/lib'
 import Link from 'next/link'
 import { useCategoriesStore } from '@/entities/categories'
 
-const cats = [
-	'Пиццы',
-	'Комбо',
-	'Закуски',
-	'Коктейли',
-	'Кофе',
-	'Напитки',
-	'Десерты',
-	'Десерты',
-]
-
-export const CategoriesFeature: FC<Props> = ({ className }) => {
+export const CategoriesFeature: FC<Props> = ({ className, categories }) => {
 	const { activeCategoryId } = useCategoriesStore()
 
 	return (
@@ -26,17 +15,17 @@ export const CategoriesFeature: FC<Props> = ({ className }) => {
 				className,
 			)}
 		>
-			{cats.map((name, i) => (
+			{categories.map((item) => (
 				<Link
-					key={name}
+					key={item.id}
 					className={cn(
 						'flex items-center font-bold h-11 rounded-2xl px-5',
-						activeCategoryId === i + 1 &&
+						activeCategoryId === item.id &&
 							'bg-white shadow-md shadow-gray-200 text-primary',
 					)}
-					href={`/#${name}`}
+					href={`/#${item.name}`}
 				>
-					{name}
+					{item.name}
 				</Link>
 			))}
 		</div>
