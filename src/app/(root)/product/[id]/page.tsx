@@ -1,8 +1,8 @@
 import { Container, Title } from '@/shared/ui'
-import { prisma } from '../../../../prisma/prisma-client'
 import { notFound } from 'next/navigation'
 import { ProductImage } from '@/entities'
 import { ProductGroupSelectorFeature } from '@/features'
+import { prisma } from '../../../../../prisma/prisma-client'
 
 export default async function ProductPage({
 	params: { id },

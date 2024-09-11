@@ -1,7 +1,7 @@
 import { FiltersFeature, SortProductsFeature } from '@/features'
 import { Container, Title } from '@/shared/ui'
 import { CategoriesWidget, ProductsListWidget } from '@/widgets'
-import { prisma } from '../../prisma/prisma-client'
+import { prisma } from '../../../prisma/prisma-client'
 
 export default async function Home() {
 	const categories = await prisma.category.findMany({
